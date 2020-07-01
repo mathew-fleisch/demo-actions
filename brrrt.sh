@@ -28,13 +28,17 @@ while IFS= read -r ip; do
     if [ $pid_count -eq $number_pids_per_container ]; then
       # Remove leading comma from payload
       payload=$(echo $payload | sed -e 's/^,//g')
-      echo "Payload: $payload"
+      # echo "Payload: $payload"
 
       # Send payload
+      echo "--------------------------------------"
+      echo "Action: ${GIT_ACTION}"
+      echo "Send: { \"ips\": \"${payload}\" }"
+      echo "To: https://api.github.com/repos/${GIT_OWNER}/${GIT_REPOSITORY}/dispatches"
       curl -s -H "Accept: application/vnd.github.everest-preview+json" \
         -H "Authorization: token ${GIT_TOKEN}" \
         --request POST \
-        --data '{"event_type": "'$GIT_ACTION'", "client_payload": { "ips": "'$payload'" }' \
+        --data '{"event_type": "'$GIT_ACTION'", "client_payload": { "ips": "'$payload'" } }' \
         https://api.github.com/repos/${GIT_OWNER}/${GIT_REPOSITORY}/dispatches
 
       # Reset payload variables
