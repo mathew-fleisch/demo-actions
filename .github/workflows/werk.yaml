@@ -8,11 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: traceroute ips
+      - name: whois ips
         env:
           IPS: ${{ github.event.client_payload.ips }}
         run: |
-          sudo apt-get update && sudo apt-get install -y traceroute
+          # sudo apt-get update && sudo apt-get install -y whois
           if ! [ -f "work.sh" ]; then
             echo "Missing work script..."
             exit 1
