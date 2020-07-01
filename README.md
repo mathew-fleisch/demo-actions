@@ -13,10 +13,10 @@ https://help.github.com/en/github/authenticating-to-github/creating-a-personal-a
 ```
 # Usage
 export GIT_TOKEN=INSERT_PERSONAL_ACCESS_TOKEN
-GIT_OWNER=mathew-fleisch \
-    GIT_REPOSITORY=demo-actions \
-    GIT_ACTION=do-werk \
-    ./brrrt.sh ips_small.txt
+export GIT_OWNER=mathew-fleisch
+export GIT_REPOSITORY=demo-actions
+export GIT_ACTION=do-werk
+./brrrt.sh ips_small.txt
 
 # Example output
 Action: do-werk
