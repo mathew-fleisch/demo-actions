@@ -22,7 +22,7 @@ while IFS= read -r ip; do
   # skip blank lines
   if ! [ -z $ip ]; then
     pid_count=$((pid_count+1))
-    echo "IP: $ip"
+    # echo "IP: $ip"
     payload="$payload,$ip"
     # Send off payload, if the pid_count == $number_pids_per_container
     if [ $pid_count -eq $number_pids_per_container ]; then
@@ -31,7 +31,6 @@ while IFS= read -r ip; do
       # echo "Payload: $payload"
 
       # Send payload
-      echo "--------------------------------------"
       echo "Action: ${GIT_ACTION}"
       echo "Send: { \"ips\": \"${payload}\" }"
       echo "To: https://api.github.com/repos/${GIT_OWNER}/${GIT_REPOSITORY}/dispatches"
@@ -44,6 +43,7 @@ while IFS= read -r ip; do
       # Reset payload variables
       payload=""
       pid_count=0
+      echo "--------------------------------------"
     fi
   fi
 done < "$ips"
