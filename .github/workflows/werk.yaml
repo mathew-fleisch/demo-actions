@@ -12,7 +12,7 @@ jobs:
         env:
           IPS: ${{ github.event.client_payload.ips }}
         run: |
-          # sudo apt-get update && sudo apt-get install -y whois
+          sudo apt-get update && sudo apt-get install -y whois
           if ! [ -f "work.sh" ]; then
             echo "Missing work script..."
             exit 1
