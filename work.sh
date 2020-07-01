@@ -13,11 +13,11 @@ for ip in "${ADDR[@]}"; do
     ip_filename=$(echo $ip | sed -e 's/\./-/g')
 
     # Run some process, save output to log, and send to background
-    ping -q -c 1 $ip | tee "log-${ip_filename}.txt" &
+    traceroute $ip | tee "log-${ip_filename}.txt" &
 done
 
 # Timeout to wait for background processes to finish
-sleep 10
+sleep 30
 
 zip logs.zip log-*
 
