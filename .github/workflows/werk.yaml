@@ -1,0 +1,26 @@
+name: werk werk werk
+on:
+  repository_dispatch:
+    types: do-werk
+jobs:
+  build:
+    name: Doing werk
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: traceroute ips
+        env:
+          IPS: ${{ github.event.client_payload.ips }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          if ! [ -f "work.sh" ]; then
+            echo "Missing work script..."
+            exit 1
+          fi
+          echo "Running: ./work.sh ${IPS}"
+          ./work.sh "${IPS}"
+      - name: Upload log as artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: logs.zip
+          path: logs.zip
