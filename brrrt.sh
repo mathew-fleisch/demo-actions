@@ -38,7 +38,7 @@ while IFS= read -r ip; do
       curl -s -H "Accept: application/vnd.github.everest-preview+json" \
         -H "Authorization: token ${GIT_TOKEN}" \
         --request POST \
-        --data '{"event_type": "'$GIT_ACTION'", "client_payload": { "ips": "'$payload'" } }' \
+        --data '{"event_type": "'$GIT_ACTION'", "client_payload": { "ips": "'$payload'" }}' \
         https://api.github.com/repos/${GIT_OWNER}/${GIT_REPOSITORY}/dispatches
 
       # Reset payload variables
