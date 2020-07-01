@@ -13,7 +13,7 @@ if [ -z "$1" ]; then
     exit 1
 fi
 ips="$1"
-number_pids_per_container=2
+number_pids_per_container=6
 pid_count=0
 payload=""
 
