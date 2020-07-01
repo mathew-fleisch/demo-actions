@@ -17,7 +17,7 @@ for ip in "${ADDR[@]}"; do
 done
 
 # Timeout to wait for background processes to finish
-sleep 30
+sleep 10
 
 zip logs.zip log-*
 

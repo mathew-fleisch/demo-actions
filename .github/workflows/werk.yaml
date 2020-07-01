@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: traceroute ips
+      - name: ping ips
         env:
           IPS: ${{ github.event.client_payload.ips }}
         run: |
