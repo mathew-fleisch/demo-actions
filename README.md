@@ -1,13 +1,18 @@
 # Demo Github Actions
-https://github.com/mathew-fleisch/demo-actions/actions
-Example Log: https://github.com/mathew-fleisch/demo-actions/runs/827145211?check_suite_focus=true
 
-Must create personal access token, and save it as environment variable: GIT_TOKEN
+This demo shows how to use github actions to parallelize a job. The [brrrt.sh](brrrt.sh) script is intended to be run locally and fires of a number of curl requests. The script takes a new line separated text file of ip addresses and groups them together by the `number_pids_per_container` variable to send off to github actions as a json payload. The github actions file [werk.yaml](.github/workflows/werk.yaml) listens for the curls and passes the payloads to the [work.sh](work.sh) script. The [work.sh](work.sh) script takes a comma separate list of ip addresses as the first argument and runs a `ping` command, on each one as a background process. The background processes are non-blocking, so a `sleep 10` is added to make sure all processes finish. The output of each background process is saved in log files, zipped up, and saved as an artifact in the github actions job.
+
+***Github Actions UI:*** https://github.com/mathew-fleisch/demo-actions/actions
+
+***Example Log:*** https://github.com/mathew-fleisch/demo-actions/runs/827145211?check_suite_focus=true
+
+Must create personal access token, and export it as environment variable: `GIT_TOKEN`
 https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
 
 
 ```
-# Usage 
+# Usage
+export GIT_TOKEN=INSERT_PERSONAL_ACCESS_TOKEN
 GIT_OWNER=mathew-fleisch \
     GIT_REPOSITORY=demo-actions \
     GIT_ACTION=do-werk \
